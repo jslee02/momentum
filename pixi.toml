@@ -121,7 +121,6 @@ build_pymomentum = { cmd = "pip install -e ." }
 #=========
 
 [target.win-64.dependencies]
-pytorch-cuda = ">=12.1,<13"
 
 [target.win-64.tasks]
 configure = { cmd = "cmake -S . -B build -G 'Visual Studio 17 2022' -DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX -DBUILD_SHARED_LIBS=OFF -DMOMENTUM_BUILD_IO_FBX=ON -DMOMENTUM_USE_SYSTEM_GOOGLETEST=ON -DMOMENTUM_USE_SYSTEM_PYBIND11=ON -DMOMENTUM_USE_SYSTEM_RERUN_CPP_SDK=ON -DMOMENTUM_BUILD_TESTING=ON -DMOMENTUM_BUILD_EXAMPLES=ON -DMOMENTUM_BUILD_PYMOMENTUM=OFF", inputs = [
