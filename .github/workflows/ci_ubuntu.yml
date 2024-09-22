@@ -47,16 +47,22 @@ jobs:
         if: ${{ contains(matrix.pixi_env, 'cuda') || contains(matrix.pixi_env, 'gpu') }}
         uses: easimon/maximize-build-space@master
         with:
-          root-reserve-mb: 512
-          swap-size-mb: 1024
-          remove-dotnet: "true"
+          root-reserve-mb: 8192
+          remove-dotnet: true
+          remove-android: true
+          remove-haskell: true
+          remove-codeql: true
+          remove-docker-images: true
 
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install CUDA Toolkit (apt)
+      - name: Install CUDA Toolkit
         if: ${{ contains(matrix.pixi_env, 'cuda') || contains(matrix.pixi_env, 'gpu') }}
-        run: sudo apt-get install nvidia-cuda-toolkit
+        uses: Jimver/cuda-toolkit@v0.2.17
+        id: cuda-toolkit
+        with:
+          cuda: "12.0.1"
 
       - name: Check CUDA Version
         if: ${{ contains(matrix.pixi_env, 'cuda') || contains(matrix.pixi_env, 'gpu') }}
@@ -73,6 +79,8 @@ jobs:
       - name: DEBUG - conda info
         run: |
           conda info
+          echo "Free space:"
+          df -h
 
       - name: Build PyMomentum
         run: |
