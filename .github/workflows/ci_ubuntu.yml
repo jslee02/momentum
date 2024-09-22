@@ -46,11 +46,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Check CUDA Version
-        if: ${{ contains(matrix.pixi_env, 'cuda') || contains(matrix.pixi_env, 'gpu') }}
-        run: |
-          nvcc --version
-
       - name: Set up pixi
         uses: prefix-dev/setup-pixi@v0.8.1
         with:
