@@ -759,10 +759,14 @@ parameters rather than joints.  Does not modify the parameter transform.  This i
           "Returns the name of the joint.")
       .def_property_readonly(
           "parent",
-          [](const mm::Joint& joint) {
-            return joint.parent == mm::kInvalidIndex ? -1 : joint.parent;
+          [](const mm::Joint& joint) -> int {
+            if (joint.parent == mm::kInvalidIndex) {
+              return -1;
+            } else {
+              return static_cast<int>(joint.parent);
+            }
           },
-          "Returns the index of the parent joint (-1 for the parent)")
+          "Returns the index of the parent joint (-1 if it has no parent)")
       .def_property_readonly(
           "pre_rotation",
           [](const mm::Joint& joint) {
