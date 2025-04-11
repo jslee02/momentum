@@ -570,6 +570,7 @@ TYPED_TEST(Momentum_ErrorFunctionsTest, TestSkinningErrorFunction) {
 
 TYPED_TEST(Momentum_ErrorFunctionsTest, VertexErrorFunctionSerial) {
   using T = typename TestFixture::Type;
+  SCOPED_TRACE(fmt::format("ScalarType: {}", typeid(T).name()));
 
   // create skeleton and reference values
 
@@ -671,6 +672,7 @@ TYPED_TEST(Momentum_ErrorFunctionsTest, VertexErrorFunctionSerial) {
 
 TYPED_TEST(Momentum_ErrorFunctionsTest, VertexErrorFunctionParallel) {
   using T = typename TestFixture::Type;
+  SCOPED_TRACE(fmt::format("ScalarType: {}", typeid(T).name()));
 
   // create skeleton and reference values
 
