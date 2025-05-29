@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.16.3)
 
 project(momentum)
 
-find_package(rerun_sdk REQUIRED)
 find_package(momentum REQUIRED)
 
 link_directories(/usr/local/lib)
@@ -31,19 +30,19 @@ add_custom_target(copy_urdf ALL
 
 target_link_libraries(using_character_solver_error_function
   PRIVATE
-    rerun_sdk
     momentum::momentum
     momentum::diff_ik
     momentum::io
     momentum::io_urdf
+    momentum::rerun
 )
 
 
 target_link_libraries(using_diff_error_function
   PRIVATE
-    rerun_sdk
     momentum::momentum
     momentum::diff_ik
     momentum::io
     momentum::io_urdf
+    momentum::rerun
 )
