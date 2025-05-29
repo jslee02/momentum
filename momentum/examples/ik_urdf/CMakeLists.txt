@@ -4,10 +4,8 @@ project(momentum)
 
 find_package(rerun_sdk REQUIRED)
 find_package(momentum REQUIRED)
-find_package(Eigen3 REQUIRED)
 
 link_directories(/usr/local/lib)
-file(GLOB MOMENTUM_LIBS /usr/local/lib/libmomentum_*.so)
 
 
 
@@ -31,15 +29,21 @@ add_custom_target(copy_urdf ALL
 )
 
 
-target_link_libraries(using_character_solver_error_function PRIVATE 
+target_link_libraries(using_character_solver_error_function
+  PRIVATE
+    rerun_sdk
+    momentum::momentum
+    momentum::diff_ik
+    momentum::io
+    momentum::io_urdf
+)
 
-rerun_sdk
-${MOMENTUM_LIBS} 
-Eigen3::Eigen)
 
-
-target_link_libraries( 
-using_diff_error_function PRIVATE
-rerun_sdk
-${MOMENTUM_LIBS} 
-Eigen3::Eigen)
+target_link_libraries(using_diff_error_function
+  PRIVATE
+    rerun_sdk
+    momentum::momentum
+    momentum::diff_ik
+    momentum::io
+    momentum::io_urdf
+)
